@@ -367,6 +367,10 @@
           <artifactId>javax.ws.rs-api</artifactId>
           <groupId>javax.ws.rs</groupId>
         </exclusion>
+        <exclusion>
+          <artifactId>javax.el</artifactId>
+          <groupId>org.glassfish</groupId>
+        </exclusion>
       </exclusions>
     </dependency>
 
@@ -759,6 +763,10 @@
         <exclusion>
           <artifactId>javax.ws.rs-api</artifactId>
           <groupId>javax.ws.rs</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>javax.el</artifactId>
+          <groupId>org.glassfish</groupId>
         </exclusion>
       </exclusions>
       <version>${phoenix.version}</version>
