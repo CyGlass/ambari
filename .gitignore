@@ -32,3 +32,5 @@ createDDL.jdbc
 /dist
 /build
 ambari_python.egg-info
+.checkstyle
+*.log
