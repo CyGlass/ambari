@@ -7,17 +7,17 @@ function usage() {
 
 # ENDPOINT argument
 if [ "" == "$1" ]; then
-  usage "please specify ENDPOINT (e.g. http://ambari-node-dev:8080/api/v1)" ; return
+  usage "please specify ENDPOINT (e.g. http://ambari-node-dev:8080/api/v1)" ; exit 1
 fi
 ENDPOINT=$1
 
 if [[ ! $ENDPOINT == *"api/v"* ]]; then
-  usage "ENDPOINT must contain 'api' and version expression (e.g. http://ambari-node-dev:8080/api/v1)" ; return
+  usage "ENDPOINT must contain 'api' and version expression (e.g. http://ambari-node-dev:8080/api/v1)" ; exit 1
 fi
 
 # USERNAME argument
 if [ "" == "$2" ]; then
-  usage "please specify USERNAME (e.g. admin)" ; return
+  usage "please specify USERNAME (e.g. admin)" ; exit 1
 fi
 USERNAME=$2
 
@@ -124,7 +124,7 @@ function acurl() {
     echo "debug> do output"
   fi
   if [ \$CURL_EXIT_STATUS -ne 0 ] ; then  
-    echo "curl($CURL_EXIT_STATUS) - curl exited with non-zero status"
+    echo "curl(\$CURL_EXIT_STATUS) - curl exited with non-zero status"
     if [ "" != "\$RESPONSE" ]; then
       if [ "\$JQ_OUTPUT" = true ]; then
         echo \$RESPONSE | jq '.'
@@ -152,6 +152,6 @@ echo "  acurl <document path> [CURL ARGUMENTS]"
 
 EOF
 
-
+echo "acurl is configured, source the session.rc file into your shell to continue"
 
 
