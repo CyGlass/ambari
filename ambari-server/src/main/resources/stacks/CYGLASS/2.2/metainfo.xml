@@ -17,6 +17,9 @@
 -->
 <metainfo>
     <versions>
-	  <active>false</active>
+	  <active>true</active>
     </versions>
+    <extends>2.1</extends>
+    <minJdk>1.8</minJdk>
+    <maxJdk>1.8</maxJdk>
 </metainfo>

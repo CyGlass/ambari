@@ -16,7 +16,11 @@
    limitations under the License.
 -->
 <metainfo>
-    <versions>
-	  <active>false</active>
-    </versions>
+  <schemaVersion>2.0</schemaVersion>
+  <services>
+    <service>
+      <name>HDFS</name>
+      <version>2.4.0.2.1</version>
+    </service>
+  </services>
 </metainfo>
