@@ -49,12 +49,12 @@
   -->
   <os family="ubuntu20">
     <repo>
-      <baseurl>http://52.14.223.31/cyglass/ubuntu20/HDP</baseurl>
+      <baseurl>http://172.31.34.172/cyglass/ubuntu20/HDP</baseurl>
       <repoid>HDP-2.0.6</repoid>
       <reponame>HDP</reponame>
       <unique>true</unique>
       <repo>
-        <baseurl>http://52.14.223.31/cyglass/ubuntu20/HDP-UTILS</baseurl>
+        <baseurl>http://172.31.34.172/cyglass/ubuntu20/HDP-UTILS</baseurl>
         <repoid>HDP-UTILS-1.1.0.17</repoid>
         <reponame>HDP-UTILS</reponame>
         <unique>false</unique>
