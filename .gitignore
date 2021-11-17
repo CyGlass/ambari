@@ -35,3 +35,4 @@ ambari_python.egg-info
 .checkstyle
 *.log
 .factorypath
+files.txt
