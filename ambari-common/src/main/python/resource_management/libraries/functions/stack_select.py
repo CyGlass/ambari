@@ -139,12 +139,22 @@ def get_supported_packages():
   Parses the output from <stack-select> packages and returns an array of the various packages.
   :return: and array of packages support by <stack-select>
   """
-  stack_selector_path = stack_tools.get_stack_tool_path(stack_tools.STACK_SELECTOR_NAME)
-  command = (STACK_SELECT_PREFIX, stack_selector_path, "packages")
-  code, stdout = shell.call(command, sudo = True,  quiet = True)
 
-  if code != 0 or stdout is None:
-    raise Fail("Unable to query for supported packages using {0}".format(stack_selector_path))
+
+  # stack_selector_path = stack_tools.get_stack_tool_path(stack_tools.STACK_SELECTOR_NAME)
+  # command = (STACK_SELECT_PREFIX, stack_selector_path, "packages")
+  # code, stdout = shell.call(command, sudo = True,  quiet = True)
+
+  # if code != 0 or stdout is None:
+  #   raise Fail("Unable to query for supported packages using {0}".format(stack_selector_path))
+
+
+  return [
+    "hadoop-hdfs-datanode",
+    "hadoop-hdfs-namenode",
+    "hadoop-hdfs-secondarynamenode"
+  ]
+
 
   # turn the output into lines, stripping each line
   return [line.strip() for line in stdout.splitlines()]

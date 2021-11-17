@@ -16,6 +16,7 @@
    limitations under the License.
 -->
 <reposinfo>
+  <!--
   <os family="redhat6">
     <repo>
       <baseurl>http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.0.6.1</baseurl>
@@ -44,4 +45,19 @@
       </repo>
     </repo>
   </os>
+  -->
+  <os family="ubuntu20">
+    <repo>
+      <baseurl>http://172.31.34.172/HDP/ubuntu20/2.x/updates/2.2.6.0</baseurl>
+      <repoid>HDP-2.2</repoid>
+      <reponame>HDP</reponame>
+      <unique>true</unique>
+    </repo>
+    <repo>
+      <baseurl>http://172.31.34.172/HDP-UTILS-1.1.0.20/repos/ubuntu20</baseurl>
+      <repoid>HDP-UTILS-1.1.0.20</repoid>
+      <reponame>HDP-UTILS</reponame>
+      <unique>false</unique>
+    </repo>
+  </os>  
 </reposinfo>
