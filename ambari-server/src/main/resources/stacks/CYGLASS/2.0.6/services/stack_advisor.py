@@ -31,11 +31,11 @@ from resource_management.core.logger import Logger
 from stack_advisor import DefaultStackAdvisor
 
 
-class HDP206StackAdvisor(DefaultStackAdvisor):
+class CYGLASS206StackAdvisor(DefaultStackAdvisor):
 
   def __init__(self):
-    super(HDP206StackAdvisor, self).__init__()
-    self.initialize_logger("HDP206StackAdvisor")
+    super(CYGLASS206StackAdvisor, self).__init__()
+    self.initialize_logger("CYGLASS206StackAdvisor")
     Logger.logger = self.logger
 
     self.modifyMastersWithMultipleInstances()
@@ -111,11 +111,11 @@ class HDP206StackAdvisor(DefaultStackAdvisor):
 
   def getComponentLayoutValidations(self, services, hosts):
     """Returns array of Validation objects about issues with hostnames components assigned to"""
-    items = super(HDP206StackAdvisor, self).getComponentLayoutValidations(services, hosts)
+    items = super(CYGLASS206StackAdvisor, self).getComponentLayoutValidations(services, hosts)
 
     # Validating NAMENODE and SECONDARY_NAMENODE are on different hosts if possible
     # Use a set for fast lookup
-    hostsSet =  set(super(HDP206StackAdvisor, self).getActiveHosts([host["Hosts"] for host in hosts["items"]]))  #[host["Hosts"]["host_name"] for host in hosts["items"]]
+    hostsSet =  set(super(CYGLASS206StackAdvisor, self).getActiveHosts([host["Hosts"] for host in hosts["items"]]))  #[host["Hosts"]["host_name"] for host in hosts["items"]]
     hostsCount = len(hostsSet)
 
     componentsListList = [service["components"] for service in services["services"]]

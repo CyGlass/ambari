@@ -23,16 +23,16 @@ import socket
 # Local Imports
 
 try:
-  from stack_advisor_hdp206 import *
+  from stack_advisor_cyglass206 import *
 except ImportError:
   #Ignore ImportError
-  print("stack_advisor_hdp206 not found")
+  print("stack_advisor_cyglass206 not found")
 
-class HDP21StackAdvisor(HDP206StackAdvisor):
+class CYGLASS21StackAdvisor(CYGLASS206StackAdvisor):
 
   def __init__(self):
-    super(HDP21StackAdvisor, self).__init__()
-    self.initialize_logger("HDP21StackAdvisor")
+    super(CYGLASS21StackAdvisor, self).__init__()
+    self.initialize_logger("CYGLASS21StackAdvisor")
 
     self.modifyMastersWithMultipleInstances()
     self.modifyCardinalitiesDict()
@@ -93,7 +93,7 @@ class HDP21StackAdvisor(HDP206StackAdvisor):
     """
 
     # since old stack advisors are extending each other they should call parent method first
-    super(HDP21StackAdvisor, self).modifyComponentLayoutSchemes()
+    super(CYGLASS21StackAdvisor, self).modifyComponentLayoutSchemes()
 
     self.componentLayoutSchemes.update({
       'APP_TIMELINE_SERVER': {31: 1, "else": 2},
@@ -101,7 +101,7 @@ class HDP21StackAdvisor(HDP206StackAdvisor):
     })
 
   def getServiceConfigurationRecommenderDict(self):
-    parentRecommendConfDict = super(HDP21StackAdvisor, self).getServiceConfigurationRecommenderDict()
+    parentRecommendConfDict = super(CYGLASS21StackAdvisor, self).getServiceConfigurationRecommenderDict()
     childRecommendConfDict = {
       "OOZIE": self.recommendOozieConfigurations,
       "HIVE": self.recommendHiveConfigurations,
@@ -127,7 +127,7 @@ class HDP21StackAdvisor(HDP206StackAdvisor):
     self.updateMountProperties("falcon-startup.properties", falcon_mounts, configurations, services, hosts)
 
   def recommendOozieConfigurations(self, configurations, clusterData, services, hosts):
-    super(HDP21StackAdvisor, self).recommendOozieConfigurations(configurations, clusterData, services, hosts)
+    super(CYGLASS21StackAdvisor, self).recommendOozieConfigurations(configurations, clusterData, services, hosts)
 
     oozieSiteProperties = self.getSiteProperties(services['configurations'], 'oozie-site')
     oozieEnvProperties = self.getSiteProperties(services['configurations'], 'oozie-env')
@@ -238,7 +238,7 @@ class HDP21StackAdvisor(HDP206StackAdvisor):
       putTezProperty("tez.queue.name", recommended_tez_queue)
 
   def getServiceConfigurationValidators(self):
-    parentValidators = super(HDP21StackAdvisor, self).getServiceConfigurationValidators()
+    parentValidators = super(CYGLASS21StackAdvisor, self).getServiceConfigurationValidators()
     childValidators = {
       "HIVE": {"hive-site": self.validateHiveConfigurations},
       "TEZ": {"tez-site": self.validateTezConfigurations}

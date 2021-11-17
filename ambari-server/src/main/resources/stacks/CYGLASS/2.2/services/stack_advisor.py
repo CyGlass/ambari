@@ -30,16 +30,16 @@ import xml.etree.ElementTree as ET
 # Local Imports
 
 try:
-  from stack_advisor_hdp21 import *
+  from stack_advisor_cyglass21 import *
 except ImportError:
   #Ignore ImportError
-  print("stack_advisor_hdp21 not found")
+  print("stack_advisor_cyglass21 not found")
 
-class HDP22StackAdvisor(HDP21StackAdvisor):
+class CYGLASS22StackAdvisor(CYGLASS21StackAdvisor):
 
   def __init__(self):
-    super(HDP22StackAdvisor, self).__init__()
-    self.initialize_logger("HDP22StackAdvisor")
+    super(CYGLASS22StackAdvisor, self).__init__()
+    self.initialize_logger("CYGLASS22StackAdvisor")
 
     self.modifyMastersWithMultipleInstances()
     self.modifyCardinalitiesDict()
@@ -89,7 +89,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
     pass
 
   def getServiceConfigurationRecommenderDict(self):
-    parentRecommendConfDict = super(HDP22StackAdvisor, self).getServiceConfigurationRecommenderDict()
+    parentRecommendConfDict = super(CYGLASS22StackAdvisor, self).getServiceConfigurationRecommenderDict()
     childRecommendConfDict = {
       "HDFS": self.recommendHDFSConfigurations,
       "HIVE": self.recommendHIVEConfigurations,
@@ -134,7 +134,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
         putSparkThriftSparkConf("spark.yarn.queue", recommended_spark_queue)
 
   def recommendYARNConfigurations(self, configurations, clusterData, services, hosts):
-    super(HDP22StackAdvisor, self).recommendYARNConfigurations(configurations, clusterData, services, hosts)
+    super(CYGLASS22StackAdvisor, self).recommendYARNConfigurations(configurations, clusterData, services, hosts)
     putYarnProperty = self.putProperty(configurations, "yarn-site", services)
     putYarnProperty('yarn.nodemanager.resource.cpu-vcores', clusterData['cpu'])
     putYarnProperty('yarn.scheduler.minimum-allocation-vcores', 1)
@@ -185,7 +185,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
       putYarnProperty('hadoop.registry.rm.enabled', 'false')
 
   def recommendHDFSConfigurations(self, configurations, clusterData, services, hosts):
-    super(HDP22StackAdvisor, self).recommendHDFSConfigurations(configurations, clusterData, services, hosts)
+    super(CYGLASS22StackAdvisor, self).recommendHDFSConfigurations(configurations, clusterData, services, hosts)
     putHdfsSiteProperty = self.putProperty(configurations, "hdfs-site", services)
     putHdfsSitePropertyAttribute = self.putPropertyAttribute(configurations, "hdfs-site")
     putHdfsSiteProperty("dfs.datanode.max.transfer.threads", 16384 if clusterData["hBaseInstalled"] else 4096)
@@ -344,7 +344,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
       putHdfsSitePropertyAttribute('dfs.encryption.key.provider.uri','delete','true')
 
   def recommendHIVEConfigurations(self, configurations, clusterData, services, hosts):
-    super(HDP22StackAdvisor, self).recommendHiveConfigurations(configurations, clusterData, services, hosts)
+    super(CYGLASS22StackAdvisor, self).recommendHiveConfigurations(configurations, clusterData, services, hosts)
 
     putHiveServerProperty = self.putProperty(configurations, "hiveserver2-site", services)
     putHiveEnvProperty = self.putProperty(configurations, "hive-env", services)
@@ -428,7 +428,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
     if "YARN" in servicesList:
       if not "yarn-site" in configurations:
         self.recommendYARNConfigurations(configurations, clusterData, services, hosts)
-      #properties below should be always present as they are provided in HDP206 stack advisor at least
+      #properties below should be always present as they are provided in HDP206/CYGLASS206 stack advisor at least
       yarnMaxAllocationSize = min(30 * int(configurations["yarn-site"]["properties"]["yarn.scheduler.minimum-allocation-mb"]), int(configurations["yarn-site"]["properties"]["yarn.scheduler.maximum-allocation-mb"]))
       #duplicate tez task resource calc logic, direct dependency doesn't look good here (in case of Hive without Tez)
       container_size = clusterData['mapMemory'] if clusterData['mapMemory'] > 2048 else int(clusterData['reduceMemory'])
@@ -660,7 +660,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
 
 
   def recommendHBASEConfigurations(self, configurations, clusterData, services, hosts):
-    super(HDP22StackAdvisor, self).recommendHbaseConfigurations(configurations, clusterData, services, hosts)
+    super(CYGLASS22StackAdvisor, self).recommendHbaseConfigurations(configurations, clusterData, services, hosts)
     putHbaseEnvPropertyAttributes = self.putPropertyAttribute(configurations, "hbase-env")
 
     hmaster_host = self.getHostWithComponent("HBASE", "HBASE_MASTER", services, hosts)
@@ -917,7 +917,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
     pass
 
   def recommendStormConfigurations(self, configurations, clusterData, services, hosts):
-    super(HDP22StackAdvisor, self).recommendStormConfigurations(configurations, clusterData, services, hosts)
+    super(CYGLASS22StackAdvisor, self).recommendStormConfigurations(configurations, clusterData, services, hosts)
     putStormSiteProperty = self.putProperty(configurations, "storm-site", services)
     putStormSiteAttributes = self.putPropertyAttribute(configurations, "storm-site")
     storm_site = getServicesSiteProperties(services, "storm-site")
@@ -1022,7 +1022,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
 
 
   def recommendRangerConfigurations(self, configurations, clusterData, services, hosts):
-    super(HDP22StackAdvisor, self).recommendRangerConfigurations(configurations, clusterData, services, hosts)
+    super(CYGLASS22StackAdvisor, self).recommendRangerConfigurations(configurations, clusterData, services, hosts)
     putRangerEnvProperty = self.putProperty(configurations, "ranger-env")
     cluster_env = getServicesSiteProperties(services, "cluster-env")
     security_enabled = cluster_env is not None and "security_enabled" in cluster_env and \
@@ -1031,7 +1031,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
       putRangerEnvProperty("ranger-storm-plugin-enabled", "No")
 
   def getServiceConfigurationValidators(self):
-    parentValidators = super(HDP22StackAdvisor, self).getServiceConfigurationValidators()
+    parentValidators = super(CYGLASS22StackAdvisor, self).getServiceConfigurationValidators()
     childValidators = {
       "HDFS": {"hdfs-site": self.validateHDFSConfigurations,
                "hadoop-env": self.validateHDFSConfigurationsEnv,
@@ -1090,7 +1090,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
     if "referenceNodeManagerHost" in clusterData:
       nodemanagerMinRam = min(clusterData["referenceNodeManagerHost"]["total_mem"]/1024, nodemanagerMinRam)
     putMapredProperty('yarn.app.mapreduce.am.resource.mb', max(int(clusterData['ramPerContainer']),int(configurations["yarn-site"]["properties"]["yarn.scheduler.minimum-allocation-mb"])))
-    putMapredProperty('yarn.app.mapreduce.am.command-opts', "-Xmx" + str(int(0.8 * int(configurations["mapred-site"]["properties"]["yarn.app.mapreduce.am.resource.mb"]))) + "m" + " -Dhdp.version=${hdp.version}")
+    putMapredProperty('yarn.app.mapreduce.am.command-opts', "-Xmx" + str(int(0.8 * int(configurations["mapred-site"]["properties"]["yarn.app.mapreduce.am.resource.mb"]))) + "m" + " -Dhdp.version=2.2")
     servicesList = [service["StackServices"]["service_name"] for service in services["services"]]
     min_mapreduce_map_memory_mb = 0
     min_mapreduce_reduce_memory_mb = 0
@@ -1189,7 +1189,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
 
 
   def validateHDFSConfigurations(self, properties, recommendedDefaults, configurations, services, hosts):
-    parentValidationProblems = super(HDP22StackAdvisor, self).validateHDFSConfigurations(properties, recommendedDefaults, configurations, services, hosts)
+    parentValidationProblems = super(CYGLASS22StackAdvisor, self).validateHDFSConfigurations(properties, recommendedDefaults, configurations, services, hosts)
     # We can not access property hadoop.security.authentication from the
     # other config (core-site). That's why we are using another heuristics here
     hdfs_site = properties
@@ -1427,7 +1427,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
     return self.toConfigurationValidationProblems(validationItems, "hive-env")
 
   def validateHiveConfigurations(self, properties, recommendedDefaults, configurations, services, hosts):
-    parentValidationProblems = super(HDP22StackAdvisor, self).validateHiveConfigurations(properties, recommendedDefaults, configurations, services, hosts)
+    parentValidationProblems = super(CYGLASS22StackAdvisor, self).validateHiveConfigurations(properties, recommendedDefaults, configurations, services, hosts)
     hive_site = properties
     validationItems = []
     stripe_size_values = [8388608, 16777216, 33554432, 67108864, 134217728, 268435456]
@@ -1653,7 +1653,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
     return self.toConfigurationValidationProblems(validationItems, "ranger-storm-plugin-properties")
 
   def validateYARNEnvConfigurations(self, properties, recommendedDefaults, configurations, services, hosts):
-    parentValidationProblems = super(HDP22StackAdvisor, self).validateYARNEnvConfigurations(properties, recommendedDefaults, configurations, services, hosts)
+    parentValidationProblems = super(CYGLASS22StackAdvisor, self).validateYARNEnvConfigurations(properties, recommendedDefaults, configurations, services, hosts)
     validationItems = []
     if "yarn_cgroups_enabled" in properties:
       yarn_cgroups_enabled = properties["yarn_cgroups_enabled"].lower() == "true"
@@ -1693,7 +1693,7 @@ class HDP22StackAdvisor(HDP21StackAdvisor):
     return self.toConfigurationValidationProblems(validationItems, "ranger-env")
 
   def getAffectedConfigs(self, services):
-    affectedConfigs = super(HDP22StackAdvisor, self).getAffectedConfigs(services)
+    affectedConfigs = super(CYGLASS22StackAdvisor, self).getAffectedConfigs(services)
 
     # There are configs that are not defined in the stack but added/removed by
     # stack-advisor. Here we add such configs in order to clear the config
