@@ -28,7 +28,7 @@ import ambari_simplejson as json
 __all__ = ["RepositoryUtil", "CommandRepository"]
 
 # components_lits = repoName + postfix
-UBUNTU_REPO_COMPONENTS_POSTFIX = "main"
+UBUNTU_REPO_COMPONENTS_POSTFIX = "contrib"
 
 class RepositoryUtil:
   def __init__(self, config, tags_to_skip):

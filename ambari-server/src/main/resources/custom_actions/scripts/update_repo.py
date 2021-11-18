@@ -29,7 +29,7 @@ from resource_management.core.logger import Logger
 
 class UpdateRepo(Script):
 
-  UBUNTU_REPO_COMPONENTS_POSTFIX = "main"
+  UBUNTU_REPO_COMPONENTS_POSTFIX = "contrib"
 
   def actionexecute(self, env):
     config = Script.get_config()
