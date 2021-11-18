@@ -23,7 +23,8 @@ from resource_management.core.logger import Logger
 import ambari_simplejson as json # simplejson is much faster comparing to Python 2.6 json module and has the same functions set.
 
 # components_lits = repoName + postfix
-_UBUNTU_REPO_COMPONENTS_POSTFIX = ["main"]
+#_UBUNTU_REPO_COMPONENTS_POSTFIX = ["main"]
+_UBUNTU_REPO_COMPONENTS_POSTFIX = ["contrib"]
 
 def _alter_repo(action, repo_string, repo_template):
   """

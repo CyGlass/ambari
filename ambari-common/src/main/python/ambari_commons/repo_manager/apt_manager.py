@@ -259,11 +259,14 @@ class AptManager(GenericManager):
       copied_sources_files = []
       is_tmp_dir_created = False
       if context.use_repos:
+        Logger.info("install_package({0}) - use_repos=\n{1}".format(name,context.use_repos))
         if 'base' in context.use_repos:
           use_repos = set([v for k, v in context.use_repos.items() if k != 'base'])
+          Logger.info("[base is in context.use_repos >> use_repos=\n{0}".format(use_repos))
         else:
           cmd = cmd + ['-o', 'Dir::Etc::SourceList={0}'.format(self.properties.empty_file)]
           use_repos = set(context.use_repos.values())
+          Logger.info("[base is in context.use_repos >> use_repos=\n{0}".format(use_repos))
 
         if use_repos:
           is_tmp_dir_created = True
@@ -271,8 +274,10 @@ class AptManager(GenericManager):
           Logger.info("Temporary sources directory was created: %s" % apt_sources_list_tmp_dir)
 
           for repo in use_repos:
+            # new_sources_file = {tmpdir}-ambari-apt-sources-d/ambari-bgtp-1.list
             new_sources_file = os.path.join(apt_sources_list_tmp_dir, repo + '.list')
             Logger.info("Temporary sources file will be copied: {0}".format(new_sources_file))
+            # copy new_sources_file to /etc/apt/sources.list.d/ambari-bgtp-1.list
             sudo.copy(os.path.join(self.properties.repo_definition_location, repo + '.list'), new_sources_file)
             copied_sources_files.append(new_sources_file)
           cmd = cmd + ['-o', 'Dir::Etc::SourceParts='.format(apt_sources_list_tmp_dir)]
