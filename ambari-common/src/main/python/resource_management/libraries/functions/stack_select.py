@@ -90,7 +90,7 @@ _PACKAGE_SCOPES = (PACKAGE_SCOPE_INSTALL, PACKAGE_SCOPE_STANDARD, PACKAGE_SCOPE_
 _PARTIAL_ORCHESTRATION_SCOPES = ("PATCH", "MAINT")
 
 def _tojson(dictionary):
-  return realjson.dumps(dictionary,sort_keys=True,index=2,separators=(',',': '))
+  return json.dumps(dictionary,index=2,separators=(',',': '))
 
 def get_package_name(default_package = None):
   """

@@ -74,7 +74,7 @@ function acurl() {
   if [ "\$DEBUG" = true ]; then
     echo "debug> cpath endpoint is \${CPATH}"
     echo "debug> curl arguments are \${curlArguments[@]}"
-    echo "debug> command is: curl -s -H \"Content-Type: application/json\" -H \"X-Requested-By: \$USER\" -u \"\${USERNAME}:\${PASSWORD}\" \"\$CPATH\" \"\${curlArguments[@]}\""
+    echo "debug> command is: curl -s -H \"Content-Type: application/json\" -H \"X-Requested-By: \$USER\" -u \"${USERNAME}:${PASSWORD}\" \"\$CPATH\" \"\${curlArguments[@]}\""
   fi
   
   unset OUTPUT
@@ -84,7 +84,7 @@ function acurl() {
 
   TMP_OUTPUT=/tmp/acurl.response.out
   rm -rf \$TMP_OUTPUT
-  HTTP_STATUS=\$(curl -s -w "%{http_code}" -o \$TMP_OUTPUT -H "Content-Type: application/json" -H "X-Requested-By: \$USER" -u "\${USERNAME}:\${PASSWORD}" "\$CPATH" "\${curlArguments[@]}")
+  HTTP_STATUS=\$(curl -s -w "%{http_code}" -o \$TMP_OUTPUT -H "Content-Type: application/json" -H "X-Requested-By: \$USER" -u "${USERNAME}:${PASSWORD}" "\$CPATH" "\${curlArguments[@]}")
   CURL_EXIT_STATUS=\$?
   if [ "\$DEBUG" = true ]; then
     echo "debug> curl exit status was \$CURL_EXIT_STATUS, HTTP status was \$HTTP_STATUS"
