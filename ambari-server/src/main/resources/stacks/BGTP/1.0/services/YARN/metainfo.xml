@@ -244,6 +244,7 @@
           <category>CLIENT</category>
           <cardinality>0+</cardinality>
           <versionAdvertised>false</versionAdvertised>
+          <version>2.8.4+bigtop</version>
           <commandScript>
             <script>scripts/mapreduce2_client.py</script>
             <scriptType>PYTHON</scriptType>

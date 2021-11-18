@@ -18,7 +18,7 @@ limitations under the License.
 Ambari Agent
 
 """
-import os
+import os, json
 
 from resource_management.libraries.script.script import Script
 from resource_management.libraries.resources.hdfs_resource import HdfsResource
@@ -36,6 +36,9 @@ from resource_management.libraries import functions
 from resource_management.libraries.functions import is_empty
 
 import status_params
+
+def _tojson(dictionary):
+  return json.dumps(dictionary,indent=2,separators=(',',': '))
 
 # a map of the Ambari role to the component name
 # for use with <stack-root>/current/<component>
@@ -63,6 +66,7 @@ config_path = os.path.join(stack_root, "current/hadoop-client/conf")
 config_dir = os.path.realpath(config_path)
 
 # This is expected to be of the form #.#.#.#
+print("C>(params_linux:66) - config=\n:{0}".format(_tojson(config)))
 stack_version_unformatted = config['hostLevelParams']['stack_version']
 print("C>(params_linux:67) stack_version_unformatted={0}".format(stack_version_unformatted))
 stack_version_formatted_major = format_stack_version(stack_version_unformatted)

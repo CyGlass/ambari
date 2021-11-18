@@ -70,7 +70,6 @@ class UnknownConfiguration():
   def __init__(self, name):
     self.name = name
     print("C>(config_dictionary:71) - ctor for UnknownConfiguration, name={0}".format(name))
-    traceback.print_stack()
    
   def __getattr__(self, name):
     raise Fail("Configuration parameter '" + self.name + "' was not found in configurations dictionary!")
