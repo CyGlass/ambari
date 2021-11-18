@@ -24,14 +24,15 @@
       <reponame>BGTP</reponame>
     </repo>
   </os>
+  -->
   <os family="ubuntu18">
     <repo>
-      <baseurl>http://repos.bigtop.apache.org/releases/1.5.0/ubuntu/18.04/$(ARCH)</baseurl>
+      <baseurl>http://repos.bigtop.apache.org/releases/3.0.0/ubuntu/18.04/amd64</baseurl>
       <repoid>BGTP-1.0</repoid>
-      <reponame>BGTP</reponame>
+      <reponame>bigtop</reponame>
     </repo>
   </os>
-  -->
+  
   <os family="ubuntu20">
     <repo>
       <baseurl>http://repos.bigtop.apache.org/releases/3.0.0/ubuntu/20.04/amd64</baseurl>
