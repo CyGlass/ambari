@@ -230,15 +230,24 @@ def get_packages(scope, service_name = None, component_name = None):
     Logger.info("Skipping stack-select on {0} because it does not exist in the stack-select package structure.".format(component_name))
     return None
 
+  Logger.info("C> continuing with service_name={0} component_name={1}".format(service_name,component_name))
+
   # this one scope is not an array, so transform it into one for now so we can
   # use the same code below
   packages = data[component_name][scope]
   if scope == PACKAGE_SCOPE_STACK_SELECT:
     packages = [packages]
 
+
+  Logger.info("C> does stack-select support all these packages: {0}".format(packages))
+
   # grab the package name from the JSON and validate it against the packages
   # that the stack-select tool supports - if it doesn't support it, then try to find the legacy
   # package name if it exists
+  # 
+  # we at path: packages = /configurations/cluster-env/stack_packages
+  #                                                   > this is the properties/stack_packages.json file
+  #                                                   BGTP/stack-select/
   supported_packages = get_supported_packages()
   for index, package in enumerate(packages):
     if not is_package_supported(package, supported_packages=supported_packages):
@@ -250,7 +259,7 @@ def get_packages(scope, service_name = None, component_name = None):
         # use the legacy package
         packages[index] = legacy_package
       else:
-        raise Fail("The package {0} is not supported by this version of the stack-select tool.".format(package))
+        raise Fail("The package {0} is not supported by this version of the stack-select tool. service_name={1} component_name={2} scope={3}".format(package,service_name,component_name,scope))
 
   # transform the array bcak to a single element
   if scope == PACKAGE_SCOPE_STACK_SELECT:
