@@ -204,6 +204,23 @@ gpgcheck=0</value>
     </value-attributes>
     <on-ambari-upgrade add="true"/>
   </property>
+
+  <property>
+    <name>stack_packages</name>
+    <value/>
+    <description>Associations between component and stack-select tools.</description>
+    <property-type>VALUE_FROM_PROPERTY_FILE</property-type>
+    <value-attributes>
+      <property-file-name>stack_packages.json</property-file-name>
+      <property-file-type>json</property-file-type>
+      <read-only>true</read-only>
+      <overridable>false</overridable>
+      <visible>false</visible>
+    </value-attributes>
+    <on-ambari-upgrade add="true"/>
+  </property>
+
+
   <property>
     <name>stack_root</name>
     <value>{"BGTP":"/usr/bgtp"}</value>
