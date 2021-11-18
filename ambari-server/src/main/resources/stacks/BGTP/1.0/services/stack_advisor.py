@@ -1554,7 +1554,7 @@ class BGTP10StackAdvisor(DefaultStackAdvisor):
         "reassign_allowed" : false,
         "recovery_enabled" : false,
         "service_name" : "HBASE",
-        "stack_name" : "HDP",
+        "stack_name" : "BGTP",
         "stack_version" : "2.5",
         "hostnames" : [ "host1", "host2" ]
 
