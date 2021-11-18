@@ -144,7 +144,7 @@ def get_supported_packages():
   :return: and array of packages support by <stack-select>
   """
 
-
+  # commented out by Jay - we don't have access to the stack-select tool from HW
   # stack_selector_path = stack_tools.get_stack_tool_path(stack_tools.STACK_SELECTOR_NAME)
   # command = (STACK_SELECT_PREFIX, stack_selector_path, "packages")
   # code, stdout = shell.call(command, sudo = True,  quiet = True)
@@ -156,7 +156,10 @@ def get_supported_packages():
   return [
     "hadoop-hdfs-datanode",
     "hadoop-hdfs-namenode",
-    "hadoop-hdfs-secondarynamenode"
+    "hadoop-hdfs-secondarynamenode",
+    "hadoop-yarn-timelineserver",
+    "hadoop-mapreduce-historyserver",
+    "geekmaster"
   ]
 
 
@@ -251,6 +254,8 @@ def get_packages(scope, service_name = None, component_name = None):
   supported_packages = get_supported_packages()
   for index, package in enumerate(packages):
     if not is_package_supported(package, supported_packages=supported_packages):
+      Logger.error("C> package {0} is not in supported_packages list:{1}".format(package,supported_packages))
+
       if _PACKAGE_SCOPE_LEGACY in data[component_name]:
         legacy_package = data[component_name][_PACKAGE_SCOPE_LEGACY]
         Logger.info(
@@ -259,6 +264,9 @@ def get_packages(scope, service_name = None, component_name = None):
         # use the legacy package
         packages[index] = legacy_package
       else:
+        Logger.error("C> The package {0} is not supported by this version of the stack-select tool. service_name={1} component_name={2} scope={3}".format(package,service_name,component_name,scope))
+        
+
         raise Fail("The package {0} is not supported by this version of the stack-select tool. service_name={1} component_name={2} scope={3}".format(package,service_name,component_name,scope))
 
   # transform the array bcak to a single element
