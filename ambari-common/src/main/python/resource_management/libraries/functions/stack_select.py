@@ -196,6 +196,8 @@ def get_packages(scope, service_name = None, component_name = None):
   if stack_packages_config is None:
     Logger.error("get stack_packages_config - could not find '/configurations/cluster-env/stack_packages' in Script:\n{0}".format(Script.get_config()))
     raise Fail("The stack packages are not defined on the command. Unable to load packages for the stack-select tool")
+  else:
+    Logger.info("found stack_packages_config - did find '/configurations/cluster-env/stack_packages' in Script:\n{0}".format(Script.get_config()))
 
   data = json.loads(stack_packages_config)
 
