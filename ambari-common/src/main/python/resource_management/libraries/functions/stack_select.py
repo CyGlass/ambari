@@ -22,6 +22,7 @@ limitations under the License.
 import os
 import sys
 import re
+import json as realjson
 import ambari_simplejson as json
 
 # Local Imports
@@ -87,6 +88,9 @@ _PACKAGE_SCOPES = (PACKAGE_SCOPE_INSTALL, PACKAGE_SCOPE_STANDARD, PACKAGE_SCOPE_
 
 # the orchestration types which equal to a partial (non-STANDARD) upgrade
 _PARTIAL_ORCHESTRATION_SCOPES = ("PATCH", "MAINT")
+
+def _tojson(dictionary):
+  return realjson.dumps(dictionary,sort_keys=True,index=2,separators=(',',': '))
 
 def get_package_name(default_package = None):
   """
@@ -173,7 +177,7 @@ def get_packages(scope, service_name = None, component_name = None):
   """
   from resource_management.libraries.functions.default import default
 
-  Logger.info("get_packages(scope={0},service_name={1},component_name={2})".format(scope,service_name,component_name))
+  Logger.warning("C> get_packages(scope={0},service_name={1},component_name={2})".format(scope,service_name,component_name))
 
   if scope not in _PACKAGE_SCOPES:
     raise Fail("The specified scope of {0} is not valid".format(scope))
@@ -194,10 +198,10 @@ def get_packages(scope, service_name = None, component_name = None):
 
   stack_packages_config = default("/configurations/cluster-env/stack_packages", None)
   if stack_packages_config is None:
-    Logger.error("get stack_packages_config - could not find '/configurations/cluster-env/stack_packages' in Script:\n{0}".format(Script.get_config()))
+    Logger.error("C> get stack_packages_config - could not find '/configurations/cluster-env/stack_packages' in Script:\n{0}".format(_tojson(Script.get_config())))
     raise Fail("The stack packages are not defined on the command. Unable to load packages for the stack-select tool")
   else:
-    Logger.info("found stack_packages_config - did find '/configurations/cluster-env/stack_packages' in Script:\n{0}".format(Script.get_config()))
+    Logger.warning("C> found stack_packages_config - did find '/configurations/cluster-env/stack_packages' in Script:\n{0}".format(_tojson(Script.get_config())))
 
   data = json.loads(stack_packages_config)
 
