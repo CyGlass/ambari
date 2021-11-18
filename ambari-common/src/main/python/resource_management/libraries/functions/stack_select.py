@@ -173,6 +173,8 @@ def get_packages(scope, service_name = None, component_name = None):
   """
   from resource_management.libraries.functions.default import default
 
+  Logger.info("get_packages(scope={0},service_name={1},component_name={2})".format(scope,service_name,component_name))
+
   if scope not in _PACKAGE_SCOPES:
     raise Fail("The specified scope of {0} is not valid".format(scope))
 
@@ -192,6 +194,7 @@ def get_packages(scope, service_name = None, component_name = None):
 
   stack_packages_config = default("/configurations/cluster-env/stack_packages", None)
   if stack_packages_config is None:
+    Logger.error("get stack_packages_config - could not find '/configurations/cluster-env/stack_packages' in Script:\n{0}".format(Script.get_config()))
     raise Fail("The stack packages are not defined on the command. Unable to load packages for the stack-select tool")
 
   data = json.loads(stack_packages_config)
