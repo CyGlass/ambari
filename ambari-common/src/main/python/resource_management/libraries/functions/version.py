@@ -39,7 +39,7 @@ def format_stack_version(value):
   :param value: Input string, e.g. "2.2" or "GlusterFS", or "2.0.6.GlusterFS", or "2.2.0.1-885"
   :return: Returns a well-formatted HDP stack version of the form #.#.#.# as a string.
   """
-  Logger.info("C> format_stack_version({0})".format(value))
+  print("C>(version:42) format_stack_version({0})".format(value))
   if value:
     if "-" in value:
       first_occurrence = value.find("-")

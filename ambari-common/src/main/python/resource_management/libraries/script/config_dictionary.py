@@ -18,6 +18,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 from resource_management.core.exceptions import Fail
+import traceback
 
 IMMUTABLE_MESSAGE = """Configuration dictionary is immutable!
 
@@ -68,6 +69,8 @@ class UnknownConfiguration():
   """
   def __init__(self, name):
     self.name = name
+    print("C>(config_dictionary:71) - ctor for UnknownConfiguration, name={0}".format(name))
+    traceback.print_stack()
    
   def __getattr__(self, name):
     raise Fail("Configuration parameter '" + self.name + "' was not found in configurations dictionary!")

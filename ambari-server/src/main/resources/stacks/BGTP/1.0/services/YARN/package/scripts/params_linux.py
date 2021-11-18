@@ -64,7 +64,7 @@ config_dir = os.path.realpath(config_path)
 
 # This is expected to be of the form #.#.#.#
 stack_version_unformatted = config['hostLevelParams']['stack_version']
-Logger.info("C> stack_version_unformatted={0}".format(stack_version_unformatted))
+print("C>(params_linux:67) stack_version_unformatted={0}".format(stack_version_unformatted))
 stack_version_formatted_major = format_stack_version(stack_version_unformatted)
 stack_version_formatted = functions.get_stack_version('hadoop-yarn-resourcemanager')
 
