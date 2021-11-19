@@ -333,7 +333,7 @@
               <name>hadoop-client</name>
             </package>
             <package>
-              <name>libsnappy1</name>
+              <name>libsnappy1v5</name>
             </package>
             <package>
               <name>libsnappy-dev</name>
