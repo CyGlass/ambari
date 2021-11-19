@@ -25,6 +25,16 @@
     </repo>
   </os>
   -->
+
+  <!-- 
+
+    BigTop 3.0.0 will bring down Hadoop 3.2.2-1 ecosystem
+    BigTop 1.5.0 will bring down Hadoop 2.10.1-1 ecosystem
+
+  -->
+
+  <!-- Hadoop 3.2.2-1  -->
+  <!--
   <os family="ubuntu18">
     <repo>
       <baseurl>http://repos.bigtop.apache.org/releases/3.0.0/ubuntu/18.04/amd64</baseurl>
@@ -40,4 +50,23 @@
       <reponame>bigtop</reponame>
     </repo>
   </os>
+  -->
+
+  <!-- Hadoop 2.10.1-1 -->
+  <os family="ubuntu18">
+    <repo>
+      <baseurl>http://repos.bigtop.apache.org/releases/1.5.0/ubuntu/18.04/amd64</baseurl>
+      <repoid>BGTP-1.0</repoid>
+      <reponame>bigtop</reponame>
+    </repo>
+  </os>
+  
+  <os family="ubuntu20">
+    <repo>
+      <baseurl>http://repos.bigtop.apache.org/releases/1.5.0/ubuntu/20.04/amd64</baseurl>
+      <repoid>BGTP-1.0</repoid>
+      <reponame>bigtop</reponame>
+    </repo>
+  </os>
+
 </reposinfo>

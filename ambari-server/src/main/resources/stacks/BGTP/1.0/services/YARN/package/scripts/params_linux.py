@@ -34,6 +34,7 @@ from resource_management.libraries.functions.version import format_stack_version
 from resource_management.libraries.functions.default import default
 from resource_management.libraries import functions
 from resource_management.libraries.functions import is_empty
+#from resource_management.libraries.script.config_dictionary import UnknownConfiguration
 
 import status_params
 
@@ -67,7 +68,8 @@ config_dir = os.path.realpath(config_path)
 
 # This is expected to be of the form #.#.#.#
 print("C>(params_linux:66) - config=\n:{0}".format(_tojson(config)))
-stack_version_unformatted = config['hostLevelParams']['stack_version']
+#stack_version_unformatted = config['hostLevelParams']['stack_version']
+stack_version_unformatted = config['clusterLevelParams']['stack_version']
 print("C>(params_linux:67) stack_version_unformatted={0}".format(stack_version_unformatted))
 stack_version_formatted_major = format_stack_version(stack_version_unformatted)
 stack_version_formatted = functions.get_stack_version('hadoop-yarn-resourcemanager')
@@ -85,7 +87,7 @@ version_for_stack_feature_checks = get_stack_feature_version(config)
 stack_supports_ranger_kerberos = check_stack_feature(StackFeature.RANGER_KERBEROS_SUPPORT, version_for_stack_feature_checks)
 stack_supports_ranger_audit_db = check_stack_feature(StackFeature.RANGER_AUDIT_DB_SUPPORT, version_for_stack_feature_checks)
 
-hostname = config['hostname']
+hostname = config['agentLevelParams']['hostname']
 
 # hadoop default parameters
 hadoop_libexec_dir = stack_select.get_hadoop_dir("libexec")
@@ -164,12 +166,13 @@ container_executor_mode = 06050 if is_linux_container_executor else 02050
 kinit_path_local = get_kinit_path(default('/configurations/kerberos-env/executable_search_paths', None))
 yarn_http_policy = config['configurations']['yarn-site']['yarn.http.policy']
 yarn_https_on = (yarn_http_policy.upper() == 'HTTPS_ONLY')
-rm_hosts = config['clusterHostInfo']['rm_host']
+#rm_hosts = config['clusterHostInfo']['rm_host']
+rm_hosts = config['clusterHostInfo']['resourcemanager_hosts']
 rm_host = rm_hosts[0]
 rm_port = config['configurations']['yarn-site']['yarn.resourcemanager.webapp.address'].split(':')[-1]
 rm_https_port = default('/configurations/yarn-site/yarn.resourcemanager.webapp.https.address', ":8090").split(':')[-1]
 
-java64_home = config['hostLevelParams']['java_home']
+java64_home = config['ambariLevelParams']['java_home']
 hadoop_ssl_enabled = default("/configurations/core-site/hadoop.ssl.enabled", False)
 
 yarn_heapsize = config['configurations']['yarn-env']['yarn_heapsize']
@@ -187,6 +190,7 @@ yarn_env_sh_template = config['configurations']['yarn-env']['content']
 yarn_nodemanager_recovery_dir = default('/configurations/yarn-site/yarn.nodemanager.recovery.dir', None)
 service_check_queue_name = default('/configurations/yarn-env/service_check.queue.name', 'default')
 
+# fail fast UnknownConfiguration class - not sure how to handle this...
 if len(rm_hosts) > 1:
   additional_rm_host = rm_hosts[1]
   rm_webui_address = format("{rm_host}:{rm_port},{additional_rm_host}:{rm_port}")

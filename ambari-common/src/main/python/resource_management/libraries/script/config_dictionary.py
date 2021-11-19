@@ -65,7 +65,7 @@ class ConfigDictionary(dict):
 
 class UnknownConfiguration():
   """
-  Lazy failing for unknown configs.
+  Lazy failing for unknown configs. This class masquerades as a value from a config or map
   """
   def __init__(self, name):
     self.name = name
@@ -79,3 +79,5 @@ class UnknownConfiguration():
     Allow [] 
     """
     return self
+
+  

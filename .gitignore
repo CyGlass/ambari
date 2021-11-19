@@ -36,3 +36,4 @@ ambari_python.egg-info
 *.log
 .factorypath
 files.txt
+bin/

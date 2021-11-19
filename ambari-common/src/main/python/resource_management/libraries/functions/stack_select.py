@@ -159,6 +159,10 @@ def get_supported_packages():
     "hadoop-hdfs-secondarynamenode",
     "hadoop-yarn-timelineserver",
     "hadoop-mapreduce-historyserver",
+    "hadoop-yarn-nodemanager",
+    "hadoop-yarn-resourcemanager",
+    "zookeeper-client",
+    "zookeeper-server",
     "geekmaster"
   ]
 
