@@ -170,6 +170,9 @@ def service(action=None, name=None, user=None, options="", create_pid_dir=False,
   :param create_pid_dir: Create PID directory
   :param create_log_dir: Crate log file directory
   """
+
+  Logger.info("C> common/HDFS/utils.py:174 service(action={0}, name={1}, user={2}, options={3}".format(action,name,user,options))
+
   import params
 
   options = options if options else ""

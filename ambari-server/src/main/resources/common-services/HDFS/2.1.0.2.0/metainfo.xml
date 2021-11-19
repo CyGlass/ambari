@@ -270,8 +270,20 @@
           <osFamily>any</osFamily>
           <packages>
             <package>
-              <name>hadoop</name>
+              <name>hadoop-hdfs</name>
             </package>
+            <package>
+              <name>hadoop-hdfs-datanode</name>
+            </package>
+            <package>
+              <name>hadoop-hdfs-namenode</name>
+            </package>
+            <package>
+              <name>hadoop-hdfs-secondarynamenode</name>
+            </package>
+            <package>
+              <name>hadoop-hdfs-journalnode</name>
+            </package>                                                
           </packages>
         </osSpecific>
         
@@ -315,7 +327,7 @@
         </osSpecific>
 
         <osSpecific>
-          <osFamily>debian7,ubuntu12,ubuntu14,ubuntu16</osFamily>
+          <osFamily>debian7,ubuntu12,ubuntu14,ubuntu16,ubuntu18,ubuntu20</osFamily>
           <packages>
             <package>
               <name>hadoop-client</name>
