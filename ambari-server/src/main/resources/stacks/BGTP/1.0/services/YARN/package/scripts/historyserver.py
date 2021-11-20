@@ -91,6 +91,12 @@ class HistoryServerDefault(HistoryServer):
     env.set_params(params)
     self.configure(env) # FOR SECURITY
 
+    Logger.info("C> historyserver:94 - looking for 'stack_version_formatted_major' in params=\n{0}".format(params))
+    if params.stack_version_formatted_major:
+      Logger.info("C> historyserver:96 - check_stack_feature({0},{1})=\n{2}".format(StackFeature.COPY_TARBALL_TO_HDFS,params.stack_version_formatted_major,check_stack_feature(StackFeature.COPY_TARBALL_TO_HDFS, params.stack_version_formatted_major)))
+    else:
+      Logger.info("C> historyserver:98 params.stack_version_formatted_major was False")
+
     if params.stack_version_formatted_major and check_stack_feature(StackFeature.COPY_TARBALL_TO_HDFS, params.stack_version_formatted_major):
       # MC Hammer said, "Can't touch this"
       resource_created = copy_to_hdfs(

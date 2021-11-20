@@ -15,7 +15,7 @@
     {
       "name": "copy_tarball_to_hdfs",
       "description": "Copy tarball to HDFS support (AMBARI-12113)",
-      "min_version": "2.2.0.0"
+      "min_version": "1.0.0.0"
     },
     {
       "name": "hive_metastore_upgrade_schema",

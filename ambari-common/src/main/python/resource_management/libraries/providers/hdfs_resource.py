@@ -614,6 +614,8 @@ class HdfsResourceProvider(Provider):
   def __init__(self, resource):
     super(HdfsResourceProvider,self).__init__(resource)
 
+    #Logger.info("C> hdfs_resource.py:618 checking for dfs_type on resource:\n{0}".format(resource))
+
     self.assert_parameter_is_set('dfs_type')
     self.fsType = getattr(resource, 'dfs_type')
 

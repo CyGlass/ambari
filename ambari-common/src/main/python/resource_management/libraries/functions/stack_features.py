@@ -64,15 +64,20 @@ def check_stack_feature(stack_feature, stack_version):
 
     data = data[stack_name]
 
+
+    Logger.info("C> stack_features:67 - looking for feature '{0}' in stack_features:\n{1}".format(stack_feature,json.dumps(data["stack_features"],indent=2)))
     for feature in data["stack_features"]:
       if feature["name"] == stack_feature:
+        Logger.info("C> stack_features:71 - found feature '{0}' as {1}".format(stack_feature,json.dumps(feature)))
         if "min_version" in feature:
           min_version = feature["min_version"]
           if compare_versions(stack_version, min_version, format = True) < 0:
+            Logger.info("C> stack_features:75 - feature '{0}' does not meet min version criteria: stack_version({1}) and min_version({2}) ".format(stack_feature,stack_version,min_version))
             return False
         if "max_version" in feature:
           max_version = feature["max_version"]
           if compare_versions(stack_version, max_version, format = True) >= 0:
+            Logger.info("C> stack_features:80 - feature '{0}' does not meet max version criteria: stack_version({1}) and max_version({2}) ".format(stack_feature,stack_version,max_version))
             return False
         return True
   else:
