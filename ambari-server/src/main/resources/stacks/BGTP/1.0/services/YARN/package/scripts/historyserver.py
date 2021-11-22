@@ -118,7 +118,9 @@ class HistoryServerDefault(HistoryServer):
         params.HdfsResource(None, action="execute")
     else:
       # In stack versions before copy_tarball_to_hdfs support tez.tar.gz was copied to a different folder in HDFS.
-      install_tez_jars()
+      # @jay.houghton, this was failing, not sure why we need tez just yet
+      # install_tez_jars()
+      Logger.info("C> historyserver:123 - skipping tez jars install - not sure why we need this just yet, or if its just for Hive")
 
     service('historyserver', action='start', serviceName='mapreduce')
 
